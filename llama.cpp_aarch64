@@ -1,0 +1,69 @@
+I llama.cpp build info: 
+I UNAME_S:  Linux
+I UNAME_P:  unknown
+I UNAME_M:  aarch64
+I CFLAGS:   -I.              -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow 
+-Wstrict-prototypes -Wpointer-arith -pthread -DGGML_USE_K_QUANTS -mcpu=native
+I CXXFLAGS: -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar 
+-pthread -DGGML_USE_K_QUANTS -mcpu=native
+I LDFLAGS:  
+I CC:       cc (Debian 8.3.0-6) 8.3.0
+I CXX:      g++ (Debian 8.3.0-6) 8.3.0
+
+cc  -I.              -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes 
+-Wpointer-arith -pthread -DGGML_USE_K_QUANTS -mcpu=native   -c ggml.c -o ggml.o
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread 
+-DGGML_USE_K_QUANTS -mcpu=native -c llama.cpp -o llama.o
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread 
+-DGGML_USE_K_QUANTS -mcpu=native -c examples/common.cpp -o common.o
+cc -I.              -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes 
+-Wpointer-arith -pthread -DGGML_USE_K_QUANTS -mcpu=native   -c -o k_quants.o k_quants.c
+k_quants.c: In function ‘ggml_vec_dot_q2_K_q8_K’:
+k_quants.c:1273:36: warning: missing braces around initializer [-Wmissing-braces]
+         const int16x8x2_t mins16 = {vreinterpretq_s16_u16(vmovl_u8(vget_low_u8(mins))), 
+vreinterpretq_s16_u16(vmovl_u8(vget_high_u8(mins)))};
+                                    ^
+                                     {                                                                                                      
+}
+k_quants.c:1251:22: warning: unused variable ‘vzero’ [-Wunused-variable]
+     const int32x4_t  vzero = vdupq_n_s32(0);
+                      ^~~~~
+k_quants.c: In function ‘ggml_vec_dot_q3_K_q8_K’:
+k_quants.c:1765:43: warning: implicit declaration of function ‘vld1q_s8_x4’; did you mean ‘vld1q_s8_x2’? 
+[-Wimplicit-function-declaration]
+             const int8x16x4_t q8bytes_1 = vld1q_s8_x4(q8); q8 += 64;
+                                           ^~~~~~~~~~~
+                                           vld1q_s8_x2
+k_quants.c:1765:43: error: invalid initializer
+k_quants.c:1766:43: error: invalid initializer
+             const int8x16x4_t q8bytes_2 = vld1q_s8_x4(q8); q8 += 64;
+                                           ^~~~~~~~~~~
+k_quants.c: In function ‘ggml_vec_dot_q5_K_q8_K’:
+k_quants.c:2887:41: error: invalid initializer
+             const int8x16x4_t q8bytes = vld1q_s8_x4(q8); q8 += 64;
+                                         ^~~~~~~~~~~
+k_quants.c:2844:21: warning: unused variable ‘mzero’ [-Wunused-variable]
+     const int32x4_t mzero = vdupq_n_s32(0);
+                     ^~~~~
+k_quants.c: In function ‘ggml_vec_dot_q6_K_q8_K’:
+k_quants.c:3372:38: warning: missing braces around initializer [-Wmissing-braces]
+         const int16x8x2_t q6scales = {vmovl_s8(vget_low_s8(scales)), vmovl_s8(vget_high_s8(scales))};
+                                      ^
+                                       {                                                            }
+k_quants.c:3385:35: warning: implicit declaration of function ‘vld1q_u8_x4’; did you mean ‘vld1q_u8_x2’? 
+[-Wimplicit-function-declaration]
+             uint8x16x4_t q6bits = vld1q_u8_x4(q6); q6 += 64;
+                                   ^~~~~~~~~~~
+                                   vld1q_u8_x2
+k_quants.c:3385:35: error: invalid initializer
+k_quants.c:3386:35: error: invalid initializer
+             int8x16x4_t q8bytes = vld1q_s8_x4(q8); q8 += 64;
+                                   ^~~~~~~~~~~
+k_quants.c:3429:21: error: incompatible types when assigning to type ‘int8x16x4_t’ {aka ‘struct int8x16x4_t’} from type ‘int’
+             q8bytes = vld1q_s8_x4(q8); q8 += 64;
+                     ^
+k_quants.c:3352:22: warning: unused variable ‘vzero’ [-Wunused-variable]
+     const int32x4_t  vzero = vdupq_n_s32(0);
+                      ^~~~~
+make: *** [<builtin>: k_quants.o] Error 1
+
