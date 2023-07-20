@@ -1,0 +1,28 @@
+I llama.cpp build info: 
+I UNAME_S:  Linux
+I UNAME_P:  unknown
+I UNAME_M:  x86_64
+I CFLAGS:   -I.              -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes -Wpointer-arith -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS
+I CXXFLAGS: -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS
+I LDFLAGS:  
+I CC:       cc (Debian 8.3.0-6) 8.3.0
+I CXX:      g++ (Debian 8.3.0-6) 8.3.0
+
+cc  -I.              -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes -Wpointer-arith -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS   -c ggml.c -o ggml.o
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS -c llama.cpp -o llama.o
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS -c examples/common.cpp -o common.o
+cc -I.              -O3 -std=c11   -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes -Wpointer-arith -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS   -c -o k_quants.o k_quants.c
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/main/main.cpp ggml.o llama.o common.o k_quants.o -o main 
+
+====  Run ./main -h for help.  ====
+
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/quantize/quantize.cpp ggml.o llama.o k_quants.o -o quantize 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/quantize-stats/quantize-stats.cpp ggml.o llama.o k_quants.o -o quantize-stats 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/perplexity/perplexity.cpp ggml.o llama.o common.o k_quants.o -o perplexity 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/embedding/embedding.cpp ggml.o llama.o common.o k_quants.o -o embedding 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS pocs/vdot/vdot.cpp ggml.o k_quants.o -o vdot 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/train-text-from-scratch/train-text-from-scratch.cpp ggml.o llama.o k_quants.o -o train-text-from-scratch 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/simple/simple.cpp ggml.o llama.o common.o k_quants.o -o simple 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS -Iexamples/server examples/server/server.cpp ggml.o llama.o common.o k_quants.o -o server 
+g++ --shared -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/embd-input/embd-input-lib.cpp ggml.o llama.o common.o k_quants.o -o libembdinput.so 
+g++ -I. -I./examples -O3 -std=c++11 -fPIC -DNDEBUG -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -pthread -march=native -mtune=native -DGGML_USE_K_QUANTS examples/embd-input/embd-input-test.cpp ggml.o llama.o common.o k_quants.o -o embd-input-test  -L. -lembdinput
