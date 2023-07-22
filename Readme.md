@@ -1,3 +1,5 @@
+https://medium.com/@martin-thissen/vicuna-on-your-cpu-gpu-best-free-chatbot-according-to-gpt-4-c24b322a193a
+
 ## Docker cheatsheet (you should know this by now)
 
 ```
@@ -17,6 +19,15 @@ docker image prune
 
 ```
 docker run -it -rm DOCKER_IMAGE /bin/bash
+```
+
+### CLI invokation
+
+```
+vicuna-docker % docker run -it vicuna-docker /bin/bash
+root@08b626fb4418:/code# ls
+Dockerfile  LICENSE  Readme.md  app.py  prompts  requirements.txt  scripts
+root@08b626fb4418:/code# ./llama.cpp/main -m ./models/ggml-vicuna-13b-4bit.bin --color -f ./llama.cpp/prompts/alpaca.txt -ins -b 256 --top_k 10000 --temp 0.2 --repeat_p
 ```
 
 ### Notes
