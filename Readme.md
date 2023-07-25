@@ -1,5 +1,12 @@
 https://medium.com/@martin-thissen/vicuna-on-your-cpu-gpu-best-free-chatbot-according-to-gpt-4-c24b322a193a
 
+## Models
+As usual exist on huggingface
+
+```https://huggingface.co/localmodels/Llama-2-7B-Chat-ggml/tree/main```
+
+Stored in models directory to provided to ```llama.cpp```
+
 ## Docker cheatsheet (you should know this by now)
 
 ```
