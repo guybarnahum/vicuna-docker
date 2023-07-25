@@ -27,7 +27,7 @@ docker run -it -rm DOCKER_IMAGE /bin/bash
 vicuna-docker % docker run -it vicuna-docker /bin/bash
 root@08b626fb4418:/code# ls
 Dockerfile  LICENSE  Readme.md  app.py  prompts  requirements.txt  scripts
-root@08b626fb4418:/code# ./llama.cpp/main -m ./models/ggml-vicuna-13b-4bit.bin --color -f ./llama.cpp/prompts/alpaca.txt -ins -b 256 --top_k 10000 --temp 0.2 --repeat_p
+root@08b626fb4418:/code# ./llama.cpp/main -m ./models/ggml-vicuna-13b-4bit.bin --color -f ./llama.cpp/prompts/alpaca.txt -ins -b 256 --top_k 10000 --temp 0.2 --repeat_penalty 1 -t 7
 ```
 
 ### Notes
