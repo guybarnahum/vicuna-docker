@@ -1,17 +1,31 @@
 import argparse
 from huggingface_hub import hf_hub_download
+from os.path import isfile
 
-def parse_lines(lines,force=False):
+def parse_lines(lines,force=False,local_dir=False):
    
+   if not local_dir:
+    local_dir = "./models"
+
     for line in lines:
-        print(f'>{line}<')
+        # print(f'>{line}')
+        line = line.lstrip()
+        
+        if line.startswith("#"):
+            print("comment skipped..")
+            continue
 
         repo_id, file = line.split(":",2)
-        print(f'repo_id:{repo_id}, file:{file}')
         
+        if not force and isfile(f"{local_dir}/{file}"):    
+            print(f"{file} already exists - skipping..")
+            continue
+        
+        print(f"downloading model {repo_id}:{file}..")
+
         hf_hub_download(repo_id=repo_id, 
                         filename=file, 
-                        local_dir="./models",
+                        local_dir=local_dir,
                         #force_download=force,
                         local_dir_use_symlinks=False)
     

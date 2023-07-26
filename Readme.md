@@ -18,6 +18,7 @@ docker ps -a
 ### Deleting and Pruning
  
 ```
+docker ps -a --filter "ancestor=DOCKER_IMAGE" --format "{{.ID}}" 
 docker container rm $(docker ps -a --format "{{.ID}}")
 docker image prune
 ```
