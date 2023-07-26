@@ -1,8 +1,8 @@
 # grep the version from the mix file
-IMAGE_NAME="vicuna-docker"
+IMAGE_NAME=vicuna-docker
 VERSION=$(shell docker image inspect $(IMAGE_NAME) --format "{{.ID}}")
-PORT=5000
-MOUNT="$(PWD)/models:/code/models"
+PORT?=5000
+MOUNT?="$(PWD)/models:/code/models"
 CONTAINERS=$(shell docker ps -a --filter "ancestor=$(IMAGE_NAME)" --format "{{.ID}}")
 
 # HELP
@@ -26,6 +26,11 @@ build: ## Build the container
 build-nc: ## Build the container without caching
 	docker build --no-cache -t $(IMAGE_NAME) .
 
+clean-image: ## Remove the image
+	docker image rm $(IMAGE_NAME)
+
+clean: stop clean-image
+ 
 run: ## Run container on port 
 	docker run -i -t --rm -p=$(PORT):$(PORT) --name="$(IMAGE_NAME)" $(IMAGE_NAME)
 
