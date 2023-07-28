@@ -32,10 +32,11 @@ docker run -it -rm DOCKER_IMAGE /bin/bash
 ### CLI invokation
 
 ```
-vicuna-docker % docker run -it vicuna-docker /bin/bash
+vicuna-docker % make run-cli
+docker run -i -t --rm -p=5000:5000 -v="/Users/titan/projects/vicuna-docker/models:/code/models" --name=""vicuna-docker"" "vicuna-docker" /bin/bash
 root@08b626fb4418:/code# ls
-Dockerfile  LICENSE  Readme.md  app.py  prompts  requirements.txt  scripts
-root@08b626fb4418:/code# ./llama.cpp/main -m ./models/ggml-vicuna-13b-4bit.bin --color -f ./llama.cpp/prompts/alpaca.txt -ins -b 256 --top_k 10000 --temp 0.2 --repeat_penalty 1 -t 7
+app.py  llama.cpp  models
+root@08b626fb4418:/code# ./llama.cpp/main -m ./models/vicuna-7b-v1.3-superhot-8k.ggmlv3.q4_K_S.bin --color -f ./llama.cpp/prompts/alpaca.txt -ins -b 256 --top_k 10000 --temp 0.2 --repeat_penalty 1 -t 7
 ```
 
 ### Notes
